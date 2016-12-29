@@ -14,7 +14,6 @@ laravel开发 常用中间件
 
 config/union.php
 
-不对 test/mid进行校验的配置
 ````
 <?php
 
