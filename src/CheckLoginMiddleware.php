@@ -8,16 +8,17 @@ class CheckLoginMiddleware extends BaseMiddleware
     protected function match($request)
     {
         $redis_conf = union_config('union.mid.checkLogin.redis',[]);
-        $user_name_conf = union_config('union.mid.checkLogin.user_name',[]);
-        $user_login_token = union_config('union.mid.checkLogin.user_token',[]);
+        $name_param = union_config('union.mid.checkLogin.user_name',[]);
+        $token_param = union_config('union.mid.checkLogin.user_token',[]);
+        $token_prefix = union_config('union.mid.checkLogin.token_prefix',[]);
 
         $redis = Redis::connection($redis_conf);
 
-        $inputs = request()->all();
+        $inputs = request()->header();
 
-        if (array_key_exists($user_name_conf,$inputs) && array_key_exists($user_login_token,$inputs)){
-            $uid = $inputs[$user_name_conf];
-            $token = $inputs[$user_login_token];
+        if (array_key_exists($name_param,$inputs) && array_key_exists($token_param,$inputs)){
+            $uid = $inputs[$name_param];
+            $token = $token_prefix.$inputs[$token_param];
         }else{
             return [
                 "code" => 500,
