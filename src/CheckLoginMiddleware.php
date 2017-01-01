@@ -17,8 +17,8 @@ class CheckLoginMiddleware extends BaseMiddleware
         $inputs = request()->header();
 
         if (array_key_exists($name_param,$inputs) && array_key_exists($token_param,$inputs)){
-            $uid = $token_prefix.$inputs[$name_param];
-            $token = $inputs[$token_param];
+            $uid = $token_prefix.request()->header($name_param);
+            $token = request()->header($token_param);
         }else{
             return [
                 "code" => 500,
