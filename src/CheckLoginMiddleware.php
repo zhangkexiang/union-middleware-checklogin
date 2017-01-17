@@ -23,7 +23,7 @@ class CheckLoginMiddleware extends BaseMiddleware
             return [
                 "code" => 500,
                 "detail" => "缺少参数",
-                "data"=>[]
+                "data"=>''
             ];
         }
 
@@ -34,7 +34,7 @@ class CheckLoginMiddleware extends BaseMiddleware
             return [
                 "code" => 500,
                 "detail" => "请先登陆",
-                "data"=>[]
+                "data"=>''
             ];
         }
     }
